@@ -24,7 +24,6 @@ const App = () => {
     },
   ]);
 
-  const [yearFilter, setYearFilter] = useState(2021);
   const addExpenseHandler = (newExpense) => {
     setExpenses((expenses) => {
       return [...expenses, newExpense];
@@ -32,20 +31,10 @@ const App = () => {
     console.log(initial_expenses);
   };
 
-  const yearFilterChangeHandler = (year) => {
-    setYearFilter(year);
-  };
-
   return (
     <div>
       <NewExpense onAddExpense={addExpenseHandler} />
-      <Expenses
-        yearFilter={yearFilter}
-        expenses={initial_expenses.filter((item) => {
-          return item.date.getFullYear() === yearFilter;
-        })}
-        onYearFilterChanged={yearFilterChangeHandler}
-      />
+      <Expenses expenses={initial_expenses} />
     </div>
   );
 };
