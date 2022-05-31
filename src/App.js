@@ -23,7 +23,6 @@ const App = () => {
       date: new Date(2021, 5, 12),
     },
   ]);
-
   const addExpenseHandler = (newExpense) => {
     setExpenses((expenses) => {
       return [...expenses, newExpense];
@@ -31,9 +30,16 @@ const App = () => {
     console.log(initial_expenses);
   };
 
+
+
   return (
     <div>
-      <NewExpense onAddExpense={addExpenseHandler} />
+      
+        <NewExpense
+          onAddExpense={addExpenseHandler}
+          
+        />
+     
       <Expenses expenses={initial_expenses} />
     </div>
   );
