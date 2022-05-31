@@ -13,20 +13,35 @@ function Expenses(props) {
     setYearFilter(year);
   };
 
+  //---- we can have the content in here
+  let expensesContent = "No expenses found!";
+  if (fiteredExpenses.length > 0) {
+    expensesContent = fiteredExpenses.map((item, index) => (
+      <ExpenseItem
+        key={item.id}
+        title={item.title}
+        amount={item.amount}
+        date={item.date}
+      />
+    ));
+  }
   return (
     <Card className="expenses hello">
       <ExpensesFilter
         selected={yearFilter}
         onYearFilterChanged={yearFilterChangedHandler}
       />
-      {fiteredExpenses.map((item, index) => (
-        <ExpenseItem
-          key={item.id}
-          title={item.title}
-          amount={item.amount}
-          date={item.date}
-        />
-      ))}
+      {expensesContent}
+      {/* {fiteredExpenses.length == 0 && "No Expenses found"}
+      {fiteredExpenses.length > 0 &&
+        fiteredExpenses.map((item, index) => (
+          <ExpenseItem
+            key={item.id}
+            title={item.title}
+            amount={item.amount}
+            date={item.date}
+          />
+        ))} */}
     </Card>
   );
 }
