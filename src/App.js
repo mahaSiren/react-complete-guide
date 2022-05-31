@@ -2,7 +2,7 @@ import Expenses from "./components/Expenses/Expenses";
 import NewExpense from "./components/NewExpense/NewExpense";
 import { useState } from "react";
 const App = () => {
-  const [expenses, setExpenses] = useState([
+  const [initial_expenses, setExpenses] = useState([
     {
       id: "e1",
       title: "Toilet Paper",
@@ -24,24 +24,26 @@ const App = () => {
     },
   ]);
 
-  const [filteredExpenses, setFilteredExpenses] = useState(expenses);
-
+  const [yearFilter, setYearFilter] = useState(2021);
   const addExpenseHandler = (newExpense) => {
-    //expenses.push(newExpense);
-    setExpenses([...expenses, newExpense]);
-    console.log(expenses);
+    setExpenses((expenses) => {
+      return [...expenses, newExpense];
+    });
+    console.log(initial_expenses);
   };
 
   const yearFilterChangeHandler = (year) => {
-    console.log("In App.Js");
-    console.log(year);
+    setYearFilter(year);
   };
 
   return (
     <div>
       <NewExpense onAddExpense={addExpenseHandler} />
       <Expenses
-        expenses={expenses}
+        yearFilter={yearFilter}
+        expenses={initial_expenses.filter((item) => {
+          return item.date.getFullYear() === yearFilter;
+        })}
         onYearFilterChanged={yearFilterChangeHandler}
       />
     </div>
